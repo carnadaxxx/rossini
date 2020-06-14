@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {makeStyles} from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -29,14 +29,16 @@ const useStyles = makeStyles((theme) => ({
 function Navbar(props) {
     const classes = useStyles();
 
-
     const [visible, setVisible] = useState(false);
 
+    // Con esto se controla el estado de visible o no
     const toggleMenu = () => {
         { visible ? setVisible(false) : setVisible (true) };
     }
 
+
     const menuBody = (
+        // TODO: Con esto vamos a poner el menu con el tiempo voy a traer la lista de Menus desde el backend
         <div className={classes.menuFullPage}>
             <Typography variant="h1" component="h2" gutterBottom align={'center'}>
                 Menu
