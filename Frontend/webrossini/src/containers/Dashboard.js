@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 const Dashboard = () => {
     return (
         <div>
-            <Typography variant="h1" component="h2" gutterBottom>
+            <Typography variant="h1" component="h2" gutterBottom align={'center'}>
                 Dashboard
             </Typography>
         </div>
