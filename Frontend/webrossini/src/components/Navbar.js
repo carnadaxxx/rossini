@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import { logout }from '../actions/AuthenticationAction';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -30,6 +31,8 @@ function Navbar(props) {
     const classes = useStyles();
 
     const [visible, setVisible] = useState(false);
+
+    const dispatch = useDispatch();
 
     // Con esto se controla el estado de visible o no
     const toggleMenu = () => {
@@ -70,6 +73,10 @@ function Navbar(props) {
             { visible ? menuBody : null}
         </React.Fragment>
     );
+}
+
+Navbar.propTypes = {
+    isLogged: PropTypes.bool
 }
 
 export default Navbar;
