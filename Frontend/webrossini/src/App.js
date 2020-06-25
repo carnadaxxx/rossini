@@ -1,8 +1,8 @@
 import React from 'react';
 import 'fontsource-roboto';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
-import store from './store'
-import {Provider, useSelector} from 'react-redux';
+import {Provider } from 'react-redux';
+import store from '../src/redux/store';
 import Dashboard from '../src/containers/Dashboard';
 import Login from '../src/containers/Login';
 import SingIn from '../src/containers/SingIn';
@@ -13,6 +13,7 @@ import NotFound from '../src/components/NotFound404'
 
 
 const App = () => {
+
     return (
         <Provider store={store}>
             <Router>

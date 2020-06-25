@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { getLoginData } from '../actions/AuthenticationAction';
+
 
 const useStyles = makeStyles((theme) => ({
     margin: {
@@ -22,38 +21,34 @@ const Login = (props) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const onSubmit = e => {
+    const doSomthing = (e) => {
+        alert('esto funciona');
         e.preventDefault();
-
-
     }
 
-    if( props.isAuthenticated )
-        console.log('esta autenticado');
-
     return (
-
         <React.Fragment>
             <Typography variant="h1" component="h2" gutterBottom align={'center'}>
                 Login
             </Typography>
-            <form onSubmit={e => onSubmit(e)}>
+            <form onSubmit={doSomthing}>
                 <TextField
                     value={email}
                     label="Correo Electrónico"
                     type="email"
-                    onChange={() => setEmail(target.value)}
+                    onChange={(e) => setEmail(e.target.value)}
                     fullWidth
                     required/>
                 <TextField
                     value={password}
                     label="Contraseña"
                     type="password"
-                    onChange={() => setPassword()}
+                    onChange={(e) => setPassword(e.target.value)}
                     fullWidth
                     required/>
                 <div className={classes.blockButtons}>
                     <Button
+                        type={'submit'}
                         variant="contained"
                         color="primary"
                         className={classes.margin}
@@ -68,12 +63,5 @@ const Login = (props) => {
     );
 };
 
-const mapStateToProps = state => {
-    return {
-        isAuthenticated: state.auth.isAuthenticated,
-    }
-}
+export default Login;
 
-
-
-export default connect(mapStateToProps, {getLoginData})(Login);
