@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useDispatch } from "react-redux";
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import { logIn }from '../redux/Credenciales/AuthSlice';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -21,9 +23,12 @@ const Login = (props) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    const dispatch = useDispatch();
+
     const doSomthing = (e) => {
-        alert('esto funciona');
         e.preventDefault();
+        dispatch(logIn());
+
     }
 
     return (

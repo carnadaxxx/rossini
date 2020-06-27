@@ -4,6 +4,7 @@ import Container from '@material-ui/core/Container';
 import Navbar from '../components/Navbar';
 
 function Layout(props) {
+
     return (
         <React.Fragment>
             <CssBaseline />
