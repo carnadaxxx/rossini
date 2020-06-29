@@ -28,7 +28,6 @@ const Login = (props) => {
     const doSomthing = (e) => {
         e.preventDefault();
         dispatch(logIn());
-
     }
 
     return (

@@ -8,7 +8,8 @@ function Layout(props) {
     return (
         <React.Fragment>
             <CssBaseline />
-            <Navbar />
+            <Navbar isAuthenticated={props.isAuthenticated}/>
+            {String(props.isAuthenticated)}
             <Container maxWidth="sm">
                 { props.children }
             </Container>
