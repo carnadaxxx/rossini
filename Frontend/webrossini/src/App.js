@@ -4,7 +4,7 @@ import {BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import {useSelector} from 'react-redux';
 import PrivateRoute from '../src/components/protectedRoute';
 import Dashboard from '../src/containers/Dashboard';
-import Login from '../src/containers/Login';
+import Login from './redux/Credenciales/Login';
 import OrdersList from '../src/containers/OrdersList';
 import OrderDetail from '../src/containers/OrderDetail';
 import Layout from '../src/layout/Layout';
@@ -14,22 +14,25 @@ import  localforage  from 'localforage';
 
 const App = () => {
 
-    const [ isSessionStore, setIsSessionStore ] = useState('');
+    const [ isSessionStore, setIsSessionStore ] = useState(false);
 
-    const isAuthenticated = !!useSelector(state => state.auth.isAuthenticated);
+    const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
 
-    const test = localforage.getItem('localAuth').then(
+    const SetSession = localforage.getItem('localAuth').then(
         (value) => {
-            // value.isAuth ? console.log('true'): console.log('false');
             setIsSessionStore(!!value.isAuth);
         }
     ).catch((error) => {
         console.log(error);
     });
 
+    const test = true;
+
     return (
         <Router>
             <Layout isAuthenticated={isAuthenticated}  isSessionStore={isSessionStore}>
+                {String(isAuthenticated) + '****' + typeof (isAuthenticated) + '/*/*/*/*/*'}
+                {String(isSessionStore) + '****' + typeof (isSessionStore)}
                 <Switch>
                     <Route exact path='/' component={Login}/>
                     <PrivateRoute

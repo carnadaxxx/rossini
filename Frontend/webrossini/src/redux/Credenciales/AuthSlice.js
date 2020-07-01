@@ -6,7 +6,7 @@ export const authSlice = createSlice({
     name: 'autentificacion',
     initialState: {
         isLoading: false,
-        isAuthenticated: false
+        isAuthenticated: null
     },
     reducers: {
         logIn: state => {
@@ -20,6 +20,7 @@ export const authSlice = createSlice({
         logOut: state => {
             state.isAuthenticated = false;
             state.isLoading = false;
+            localforge.clear().catch((error)=>{console.log(error)});
             localforge.setItem('localAuth', {
                 'token': null,
                 'isAuth': false

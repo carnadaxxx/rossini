@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useDispatch } from "react-redux";
+import { Redirect } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { logIn }from '../redux/Credenciales/AuthSlice';
+import { logIn }from './AuthSlice';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -28,6 +29,7 @@ const Login = (props) => {
     const doSomthing = (e) => {
         e.preventDefault();
         dispatch(logIn());
+        return <Redirect to={'/dashboard'} />
     }
 
     return (

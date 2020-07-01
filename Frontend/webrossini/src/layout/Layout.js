@@ -8,8 +8,8 @@ function Layout(props) {
     return (
         <React.Fragment>
             <CssBaseline />
-            <Navbar isAuthenticated={props.isAuthenticated}/>
-            {String(props.isAuthenticated)}
+            <Navbar isAuthenticated={props.isAuthenticated} isSessionStore={props.isSessionStore}/>
+            {String(props.isAuthenticated) + '******' + typeof (props.isAuthenticated) + ' // ' + String(props.isSessionStore) }
             <Container maxWidth="sm">
                 { props.children }
             </Container>
