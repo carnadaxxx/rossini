@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { logIn, logFail } from './AuthSlice';
-import { showAlert } from '../Alertas/AlertSlice';
+import { showAlert, hideAlert } from '../Alertas/AlertSlice';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -41,11 +41,11 @@ const Login = (props) => {
                 options
                 ).then(
                     res => {
-                        if (res.status === 200)  showData(res)
+                        if (res.status === 200)  {showData(res);  dispatch(hideAlert())}
                     }
                 ).catch((err) => {
                     dispatch(logFail())
-                    dispatch(showAlert())
+                    dispatch(showAlert({'alertSeverity': 'error', 'messageAlert': err.response.data.detail}))
                 });
 
     }

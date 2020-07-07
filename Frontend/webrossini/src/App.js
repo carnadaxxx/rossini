@@ -18,6 +18,8 @@ const App = () => {
 
     const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
     const isAlertVisible = useSelector(state => state.alert.isAlertVisible);
+    const alertSeverity = useSelector(state => state.alert.alertSeverity);
+    const messageAlert = useSelector(state => state.alert.messageAlert);
 
     localforage.getItem('localAuth').then(
         (value) => {
@@ -33,6 +35,8 @@ const App = () => {
                 isAuthenticated={isAuthenticated}
                 isSessionStore={isSessionStore}
                 isAlertVisible={isAlertVisible}
+                alertSeverity={alertSeverity}
+                messageAlert={messageAlert}
             >
                 <Switch>
                     <Route exact path='/' component={Login}/>

@@ -10,7 +10,7 @@ function Layout(props) {
         <React.Fragment>
             <CssBaseline />
             <Navbar isAuthenticated={props.isAuthenticated} isSessionStore={props.isSessionStore}/>
-            <Alerts severity={'info'} isAlertVisible={props.isAlertVisible}/>
+            <Alerts severity={props.alertSeverity} isAlertVisible={props.isAlertVisible} messageAlert={props.messageAlert}/>
             <Container maxWidth="sm">
                 { props.children }
             </Container>
