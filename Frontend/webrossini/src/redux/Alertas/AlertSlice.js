@@ -1,20 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export const alertSlice = createSlice({
-   name: 'alerta',
+   name: 'alert',
    initialState: {
-       isVisible: false
+       isAlertVisible: false,
    },
    reducers: {
-     mostrarAlerta: state => {
-         state.isVisible = true
+     showAlert: (state, action) => {
+         state.isAlertVisible= true
      },
-     ocultarAlerta: state => {
-         state.isVisible = false
+     hideAlert: state => {
+         state.isAlertVisible = false
      }
    }
 });
 
-export const { mostrarALerta, ocultarAlerta } = alertSlice.actions;
+export const { showAlert, hideAlert } = alertSlice.actions;
 
 export default alertSlice.reducer;

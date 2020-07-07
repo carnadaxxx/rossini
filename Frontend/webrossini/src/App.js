@@ -17,8 +17,9 @@ const App = () => {
     const [ isSessionStore, setIsSessionStore ] = useState(false);
 
     const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+    const isAlertVisible = useSelector(state => state.alert.isAlertVisible);
 
-    const SetSession = localforage.getItem('localAuth').then(
+    localforage.getItem('localAuth').then(
         (value) => {
             setIsSessionStore(!!value.isAuth);
         }
@@ -26,13 +27,13 @@ const App = () => {
         console.log(error);
     });
 
-    const test = true;
-
     return (
         <Router>
-            <Layout isAuthenticated={isAuthenticated}  isSessionStore={isSessionStore}>
-                {String(isAuthenticated) + '****' + typeof (isAuthenticated) + '/*/*/*/*/*'}
-                {String(isSessionStore) + '****' + typeof (isSessionStore)}
+            <Layout
+                isAuthenticated={isAuthenticated}
+                isSessionStore={isSessionStore}
+                isAlertVisible={isAlertVisible}
+            >
                 <Switch>
                     <Route exact path='/' component={Login}/>
                     <PrivateRoute
@@ -48,10 +49,6 @@ const App = () => {
                         isAuthenticated={isAuthenticated}
                         path={'/orders/:id'}><OrderDetail/></PrivateRoute>
 
-                    {/*<Route exact path='/' component={Dashboard}/>*/}
-                    {/*<Route exact path='/new-user' component={SingIn}/>*/}
-                    {/*<Route exact path='/orders' component={OrdersList}/>*/}
-                    {/*<Route exact path='/orders/:id' component={OrderDetail}/>*/}
                     <Route component={NotFound}/>
                 </Switch>
             </Layout>

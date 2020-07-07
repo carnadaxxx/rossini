@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
-import { useDispatch } from "react-redux";
+import React, {useState} from 'react';
+import axios from 'axios'
+import {useDispatch, useSelector} from "react-redux";
 import { Redirect } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { logIn }from './AuthSlice';
+import { logIn, logFail } from './AuthSlice';
+import { showAlert } from '../Alertas/AlertSlice';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -21,15 +23,44 @@ const useStyles = makeStyles((theme) => ({
 const Login = (props) => {
     const classes = useStyles();
 
+    const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const dispatch = useDispatch();
 
-    const doSomthing = (e) => {
-        e.preventDefault();
-        dispatch(logIn());
+    const getTokenFromServer = (email, password) => {
+        const endpoint = 'http://localhost:8000/api-token/';
+        const body = JSON.stringify({'email': email, 'password': password});
+        const options = {headers:{'Content-Type': 'application/json'}};
+
+        axios.post(
+                endpoint,
+                body,
+                options
+                ).then(
+                    res => {
+                        if (res.status === 200)  showData(res)
+                    }
+                ).catch((err) => {
+                    dispatch(logFail())
+                    dispatch(showAlert())
+                });
+
+    }
+
+    const showData = (response) => {
+        dispatch(logIn(response.data.access))
+    }
+
+    if (isAuthenticated===true) {
         return <Redirect to={'/dashboard'} />
+    }
+
+    const sedDataToServer = (e) => {
+        e.preventDefault();
+        getTokenFromServer(email, password)
     }
 
     return (
@@ -37,7 +68,7 @@ const Login = (props) => {
             <Typography variant="h1" component="h2" gutterBottom align={'center'}>
                 Login
             </Typography>
-            <form onSubmit={doSomthing}>
+            <form onSubmit={sedDataToServer}>
                 <TextField
                     value={email}
                     label="Correo Electrónico"

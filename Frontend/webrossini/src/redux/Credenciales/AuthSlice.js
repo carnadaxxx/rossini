@@ -9,30 +9,30 @@ export const authSlice = createSlice({
         isAuthenticated: null
     },
     reducers: {
-        logIn: state => {
+        logIn: (state, action) => {
+            const token = action.payload;
             state.isAuthenticated = true;
             state.isLoading = false;
             localforge.setItem('localAuth', {
-                'token': 'token',
+                'access': token,
                 'isAuth': true
-            }).catch((error)=>{console.log(error)});
+            }).catch((error) =>{console.log(error)});
         },
         logOut: state => {
             state.isAuthenticated = false;
             state.isLoading = false;
             localforge.clear().catch((error)=>{console.log(error)});
             localforge.setItem('localAuth', {
-                'token': null,
+                'access': null,
                 'isAuth': false
             }).catch((error)=>{console.log(error)});
         },
-        logFail: state => {
+        logFail: (state, action) => {
             state.isAuthenticated = false;
             state.isLoading = false;
         }
     }
 });
-
 
 export const {logIn, logOut, logFail} = authSlice.actions;
 
