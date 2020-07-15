@@ -1,0 +1,16 @@
+### Authorization by token, part 1. Retrieve and save token.
+POST http://127.0.0.1:8000/api-token/
+Content-Type: application/json
+
+{
+  "email": "w.coronadobarrantes@gmail.com",
+  "password": "estrellaxxx000"
+}
+
+> {% client.global.set("auth_token", response.body.access); %}
+
+### Authorization by token, part 2. Use token to authorize.
+GET http://127.0.0.1:8000/api/1.0/orders/
+Authorization: Bearer {{auth_token}}
+
+###
